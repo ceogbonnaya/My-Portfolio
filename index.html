@@ -970,9 +970,24 @@ document.querySelectorAll('.carousel').forEach(function(car){
   track.addEventListener('mousedown', function(e){ dStart(e.pageX); });
   window.addEventListener('mousemove', function(e){ if(down){ e.preventDefault(); dMove(e.pageX); } });
   window.addEventListener('mouseup', dEnd);
-  track.addEventListener('touchstart', function(e){ dStart(e.touches[0].clientX); }, {passive:true});
-  track.addEventListener('touchmove', function(e){ dMove(e.touches[0].clientX); }, {passive:true});
-  track.addEventListener('touchend', dEnd, {passive:true});
+  var tX=0, tY=0, tDecided=false, tHoriz=false;
+  track.addEventListener('touchstart', function(e){
+    var t=e.touches[0]; tX=t.clientX; tY=t.clientY; tDecided=false; tHoriz=false; dStart(t.clientX);
+  }, {passive:true});
+  track.addEventListener('touchmove', function(e){
+    if(!down) return;
+    var t=e.touches[0];
+    if(!tDecided){
+      var ax=Math.abs(t.clientX-tX), ay=Math.abs(t.clientY-tY);
+      if(ax<8 && ay<8) return;            // wait for a clear direction
+      tHoriz = ax > ay; tDecided=true;
+      if(!tHoriz){ down=false; track.classList.remove('dragging'); return; } // vertical: let the page scroll
+    }
+    if(e.cancelable) e.preventDefault();   // horizontal: claim it for the carousel
+    dMove(t.clientX);
+  }, {passive:false});
+  track.addEventListener('touchend', function(){ dEnd(); }, {passive:true});
+  track.addEventListener('touchcancel', function(){ if(down){ down=false; track.classList.remove('dragging'); place(true); } }, {passive:true});
   track.addEventListener('dragstart', function(e){ e.preventDefault(); });
 
   var rt;
