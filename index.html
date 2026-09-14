@@ -135,9 +135,14 @@ img{display:block;max-width:100%}
    ══════════════════════════════════════════════ */
 nav{position:fixed;top:0;left:0;right:0;z-index:900;display:flex;align-items:center;justify-content:space-between;
   padding:1.25rem clamp(1.25rem,4vw,3rem);transition:all .45s cubic-bezier(.22,1,.36,1)}
-nav.scrolled{padding-top:.7rem;padding-bottom:.7rem;background:var(--glass);
-  backdrop-filter:blur(20px) saturate(150%);-webkit-backdrop-filter:blur(20px) saturate(150%);
-  border-bottom:1px solid var(--glass-brd);box-shadow:var(--shadow)}
+/* blur lives on a pseudo-element so <nav> never becomes a containing block
+   for the fixed mobile menu panel (that bug hid the top links when scrolled) */
+nav::before{content:"";position:absolute;inset:0;z-index:-1;opacity:0;
+  background:var(--glass);backdrop-filter:blur(20px) saturate(150%);-webkit-backdrop-filter:blur(20px) saturate(150%);
+  border-bottom:1px solid var(--glass-brd);box-shadow:var(--shadow);
+  transition:opacity .4s cubic-bezier(.22,1,.36,1)}
+nav.scrolled::before{opacity:1}
+nav.scrolled{padding-top:.7rem;padding-bottom:.7rem}
 .nav-logo{font-family:var(--T);font-size:1.4rem;font-weight:800;letter-spacing:.01em;
   background:var(--gradtext);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .nav-links{display:flex;align-items:center;gap:1.9rem;list-style:none}
@@ -723,8 +728,8 @@ window.addEventListener('scroll', function(){
 
 /* MOBILE MENU */
 var burger = document.getElementById('burger'), navLinks = document.getElementById('navLinks'), navScrim = document.getElementById('navScrim');
-function openMenu(){ burger.classList.add('x'); navLinks.classList.add('open'); navScrim.classList.add('on'); }
-function closeMenu(){ burger.classList.remove('x'); navLinks.classList.remove('open'); navScrim.classList.remove('on'); }
+function openMenu(){ burger.classList.add('x'); navLinks.classList.add('open'); navScrim.classList.add('on'); document.body.style.overflow='hidden'; }
+function closeMenu(){ burger.classList.remove('x'); navLinks.classList.remove('open'); navScrim.classList.remove('on'); document.body.style.overflow=''; }
 burger.addEventListener('click', function(){ navLinks.classList.contains('open') ? closeMenu() : openMenu(); });
 navScrim.addEventListener('click', closeMenu);
 navLinks.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeMenu); });
