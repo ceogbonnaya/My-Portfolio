@@ -315,6 +315,25 @@ section{position:relative;padding:clamp(3rem,5.5vw,5rem) 0;z-index:2}
   border:1px solid var(--glass-brd);color:var(--muted)}
 
 /* ══════════════════════════════════════════════
+   SELECTED PROJECTS
+   ══════════════════════════════════════════════ */
+.proj-card{display:grid;grid-template-columns:1.05fr .95fr;gap:1.6rem;align-items:center;padding:.2rem}
+.proj-media{position:relative;aspect-ratio:16/9;border-radius:var(--r-sm);overflow:hidden;
+  background:linear-gradient(135deg,var(--bg3),var(--bg4));border:1px solid var(--glass-brd);box-shadow:var(--shadow)}
+.proj-media::after{content:"";position:absolute;inset:0;
+  background:radial-gradient(120% 120% at 50% 0%,rgba(124,58,237,.18),transparent 60%)}
+.proj-soon{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.9rem}
+.proj-play{width:60px;height:60px;border-radius:50%;background:var(--glass-2);border:1px solid var(--glass-brd);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;color:var(--gold);box-shadow:var(--shadow)}
+.proj-soon .lbl{font-family:var(--M);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.proj-ctx{display:inline-block;font-family:var(--M);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:.7rem}
+.proj-title{font-family:var(--T);font-weight:700;font-size:1.5rem;line-height:1.15;margin-bottom:.7rem}
+.proj-desc{color:var(--muted);font-size:.98rem;margin-bottom:1.1rem}
+@media(max-width:760px){.proj-card{grid-template-columns:1fr;gap:1.1rem}.proj-title{font-size:1.3rem}}
+
+/* ══════════════════════════════════════════════
    TECH STACK
    ══════════════════════════════════════════════ */
 .tech-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.5rem}
@@ -438,6 +457,7 @@ footer a{color:var(--gold)}
     <li><a href="#about">About</a></li>
     <li><a href="#mavenaide">MavenAide</a></li>
     <li><a href="#gotocalls">GoToCalls</a></li>
+    <li><a href="#work">Work</a></li>
     <li><a href="#stack">Stack</a></li>
     <li><a href="#offer">The Offer</a></li>
     <li><a href="https://ceogbonnaya.github.io/Webinar-Replays/" target="_blank" rel="noopener">Webinars</a></li>
@@ -597,10 +617,94 @@ footer a{color:var(--gold)}
 
 <hr class="divider"/>
 
+<!-- SELECTED PROJECTS -->
+<section id="work">
+<div class="container">
+  <div class="s-num">04</div>
+  <span class="overline reveal"><span class="dot"></span>Selected Projects</span>
+  <h2 class="sec-title reveal d2">More work across<br/><span class="ital grad">the agencies I serve.</span></h2>
+  <p class="sec-desc reveal d3">A selection of builds delivered for other clients through the agencies I work with. Demo walkthroughs are on the way.</p>
+  <div class="subsec reveal">
+    <div class="carousel">
+      <div class="ctrack">
+        <div class="cslide">
+          <div class="proj-card">
+            <div class="proj-media"><div class="proj-soon"><span class="proj-play">▶</span><span class="lbl">Demo coming soon</span></div></div>
+            <div>
+              <span class="proj-ctx">Kajabi · Course Launch</span>
+              <h3 class="proj-title">Full Course Build on Kajabi</h3>
+              <p class="proj-desc">End-to-end course launch for a course-creator client: info page, sales page, checkout, and thank-you pages, plus the email sequences, automations, and live webinar scheduling behind them.</p>
+              <div class="pills"><span class="pill">Kajabi</span><span class="pill">Sales Funnel</span><span class="pill">Email Sequences</span><span class="pill">Automations</span><span class="pill">Live Webinars</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="cslide">
+          <div class="proj-card">
+            <div class="proj-media"><div class="proj-soon"><span class="proj-play">▶</span><span class="lbl">Demo coming soon</span></div></div>
+            <div>
+              <span class="proj-ctx">Hostinger · MailerLite</span>
+              <h3 class="proj-title">Sales Page &amp; Email Funnel</h3>
+              <p class="proj-desc">A conversion-focused sales page built on Hostinger for another client, paired with a full nurture and launch email sequence set up in MailerLite.</p>
+              <div class="pills"><span class="pill">Hostinger</span><span class="pill">MailerLite</span><span class="pill">Sales Page</span><span class="pill">Email Sequences</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="cslide">
+          <div class="proj-card">
+            <div class="proj-media"><div class="proj-soon"><span class="proj-play">▶</span><span class="lbl">Demo coming soon</span></div></div>
+            <div>
+              <span class="proj-ctx">GoHighLevel</span>
+              <h3 class="proj-title">GHL Setup &amp; Automations</h3>
+              <p class="proj-desc">A complete GoHighLevel build-out for an agency client: pipelines, calendars, and triggered follow-up automations that keep leads moving without manual chasing.</p>
+              <div class="pills"><span class="pill">GoHighLevel</span><span class="pill">CRM</span><span class="pill">Pipelines</span><span class="pill">Automations</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="cslide">
+          <div class="proj-card">
+            <div class="proj-media"><div class="proj-soon"><span class="proj-play">▶</span><span class="lbl">Demo coming soon</span></div></div>
+            <div>
+              <span class="proj-ctx">Zapier · Integrations</span>
+              <h3 class="proj-title">Cross-Tool Zapier Automations</h3>
+              <p class="proj-desc">Custom Zapier workflows connecting the tools an agency runs on, removing manual data entry and keeping every system in sync automatically.</p>
+              <div class="pills"><span class="pill">Zapier</span><span class="pill">Webhooks</span><span class="pill">Integrations</span><span class="pill">Workflow Design</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="cslide">
+          <div class="proj-card">
+            <div class="proj-media"><div class="proj-soon"><span class="proj-play">▶</span><span class="lbl">Demo coming soon</span></div></div>
+            <div>
+              <span class="proj-ctx">n8n · Claude · RAG</span>
+              <h3 class="proj-title">Obsidian + Claude RAG Agent</h3>
+              <p class="proj-desc">A retrieval-augmented AI agent linking an Obsidian knowledge base to Claude through n8n, so the team can query their own notes and docs in natural language.</p>
+              <div class="pills"><span class="pill">n8n</span><span class="pill">Claude AI</span><span class="pill">RAG</span><span class="pill">Obsidian</span><span class="pill">Vector Search</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cnav">
+        <button class="cprev">&#8249;</button>
+        <div class="cdots">
+          <button class="cdot on" data-i="0"></button>
+          <button class="cdot" data-i="1"></button>
+          <button class="cdot" data-i="2"></button>
+          <button class="cdot" data-i="3"></button>
+          <button class="cdot" data-i="4"></button>
+        </div>
+        <button class="cnext">&#8250;</button>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<hr class="divider"/>
+
 <!-- TECH STACK -->
 <section id="stack">
 <div class="container">
-  <div class="s-num">04</div>
+  <div class="s-num">05</div>
   <span class="overline reveal"><span class="dot"></span>Tech Stack</span>
   <h2 class="sec-title reveal d2">Built with precision tools,<br/><span class="ital grad">not shortcuts.</span></h2>
   <p class="sec-desc reveal d3">Every tool listed here has been used in production across real agencies, not just in theory.</p>
@@ -620,7 +724,7 @@ footer a{color:var(--gold)}
 <!-- OFFER -->
 <section id="offer">
 <div class="container">
-  <div class="s-num">05</div>
+  <div class="s-num">06</div>
   <span class="overline reveal"><span class="dot"></span>The Flagship Offer</span>
   <h2 class="sec-title reveal d2">VA Agency Launchpad</h2>
   <p class="sec-desc reveal d3">Your complete agency backend: built, tested &amp; handed over.</p>
@@ -664,7 +768,7 @@ footer a{color:var(--gold)}
 <!-- PROOF -->
 <section id="proof">
 <div class="container">
-  <div class="s-num">06</div>
+  <div class="s-num">07</div>
   <span class="overline reveal"><span class="dot"></span>What Founders Say</span>
   <h2 class="sec-title reveal d2">Trust earned through results.</h2>
   <div class="proof-grid">
