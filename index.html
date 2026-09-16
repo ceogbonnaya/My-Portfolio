@@ -196,7 +196,14 @@ section{position:relative;padding:clamp(3rem,5.5vw,5rem) 0;z-index:2}
    HERO
    ══════════════════════════════════════════════ */
 .hero{min-height:100vh;display:flex;align-items:center;padding-top:7rem;padding-bottom:4rem}
-.hero-inner{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(2rem,5vw,4.5rem);align-items:center;width:100%}
+.hero-inner{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(2rem,5vw,4.5rem);align-items:center;width:100%;position:relative;z-index:2}
+/* kinetic marquee that scrolls behind the hero photo */
+.hero-ticker{position:absolute;top:58%;left:50%;transform:translate(-50%,-50%);width:100vw;z-index:1;overflow:hidden;pointer-events:none;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
+.ticker-track{display:flex;align-items:center;width:max-content;white-space:nowrap;will-change:transform;animation:heroTicker 38s linear infinite}
+.ticker-track span{font-family:var(--M);font-size:clamp(1rem,1.9vw,1.5rem);letter-spacing:.16em;text-transform:uppercase;color:var(--gold);opacity:.68;padding:0 .15em}
+.ticker-track b{font-size:.62em;color:var(--gold);opacity:.42;padding:0 1.1em;transform:translateY(-.05em)}
+@keyframes heroTicker{from{transform:translateX(-50%)}to{transform:translateX(0)}}
 .hero-status{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--M);font-size:.72rem;letter-spacing:.08em;
   padding:.45rem .9rem;border-radius:100px;background:var(--glass);border:1px solid var(--glass-brd);color:var(--muted);
   backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);margin-bottom:1.6rem}
@@ -275,8 +282,9 @@ section{position:relative;padding:clamp(3rem,5.5vw,5rem) 0;z-index:2}
 .ss-lbl::before{content:"";width:22px;height:1px;background:var(--gold)}
 
 /* carousel */
-.carousel{position:relative;border-radius:var(--r);overflow:hidden;touch-action:pan-y;transition:height .45s cubic-bezier(.22,1,.36,1)}
-.ctrack{display:flex;align-items:flex-start;cursor:grab;transition:transform .55s cubic-bezier(.22,1,.36,1);will-change:transform}
+.carousel{position:relative;border-radius:var(--r);overflow:hidden;touch-action:pan-y}
+.ctrack{display:flex;align-items:flex-start;cursor:grab;overflow:hidden;
+  transition:transform .55s cubic-bezier(.22,1,.36,1),height .45s cubic-bezier(.22,1,.36,1);will-change:transform}
 .ctrack.dragging{transition:none;cursor:grabbing}
 .cslide{flex:0 0 100%;padding:.2rem;user-select:none}
 .cslide img{pointer-events:none}
@@ -473,19 +481,16 @@ footer a{color:var(--gold)}
 
 <!-- HERO -->
 <header class="hero container" id="hero">
+  <div class="hero-ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>Online Business Manager</span><b>◆</b><span>Systems Architect</span><b>◆</b><span>Systems Architecture</span><b>◆</b><span>Process Automation</span><b>◆</b><span>CRM &amp; Analytics</span><b>◆</b><span>Recruitment Infrastructure</span><b>◆</b><span>AI Workflows</span><b>◆</b><span>Online Business Manager</span><b>◆</b><span>Systems Architect</span><b>◆</b><span>Systems Architecture</span><b>◆</b><span>Process Automation</span><b>◆</b><span>CRM &amp; Analytics</span><b>◆</b><span>Recruitment Infrastructure</span><b>◆</b><span>AI Workflows</span><b>◆</b>
+    </div>
+  </div>
   <div class="hero-inner">
     <div>
       <div class="hero-status"><span class="sdot"></span>Available · 1 spot open</div>
-      <span class="hero-label">Online Business Manager &amp; Systems Architect</span>
       <h1 class="hero-name">Emmanuel<br/><em>Ogbonnaya</em></h1>
       <p class="hero-tag">I build the <strong>operational backbone</strong> that lets founders, coaches &amp; growing businesses scale, without the chaos.</p>
-      <div class="htags">
-        <span class="htag">Systems Architecture</span>
-        <span class="htag">Process Automation</span>
-        <span class="htag">CRM &amp; Analytics</span>
-        <span class="htag">Recruitment Infrastructure</span>
-        <span class="htag">AI Workflows</span>
-      </div>
       <div class="hero-ctas">
         <a href="https://calendly.com/ceogbonnaya/15min" target="_blank" class="btn btn-g magnetic">Book a Free Call</a>
         <a href="#offer" class="btn btn-o magnetic">View the Offer</a>
@@ -935,7 +940,7 @@ document.querySelectorAll('.carousel').forEach(function(car){
   var animating = false;
   function w(){ return car.clientWidth; }
   function dots(){ return Array.prototype.slice.call(car.querySelectorAll('.cdot')); }
-  function fit(){ var s = track.children[idx]; if(s) car.style.height = s.offsetHeight + 'px'; }  /* height follows the active slide, so short slides don't inherit the tallest slide's blank space */
+  function fit(){ var s = track.children[idx]; if(s) track.style.height = s.offsetHeight + 'px'; }  /* track height follows the active slide (so short slides lose the blank gap); carousel stays tall enough to keep the .cnav dots/arrows visible below */
   function place(anim){
     track.style.transition = anim ? '' : 'none';
     track.style.transform = 'translateX(' + (-idx * w()) + 'px)';
