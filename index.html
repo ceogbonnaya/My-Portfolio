@@ -120,8 +120,8 @@ img{display:block;max-width:100%}
 /* ══════════════════════════════════════════════
    BUTTONS
    ══════════════════════════════════════════════ */
-.btn{display:inline-flex;align-items:center;gap:.55rem;font-family:var(--B);font-weight:600;font-size:.95rem;
-  padding:.85rem 1.6rem;border-radius:100px;border:1px solid transparent;cursor:pointer;
+.btn{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--B);font-weight:600;font-size:.88rem;
+  padding:.6rem 1.25rem;border-radius:100px;border:1px solid transparent;cursor:pointer;
   transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s,background .3s,color .3s;will-change:transform}
 .btn-g{background:var(--goldf);color:#180f02;box-shadow:0 10px 30px -8px rgba(232,150,10,.6)}
 .btn-g:hover{box-shadow:0 16px 44px -10px rgba(232,150,10,.75)}
@@ -198,7 +198,7 @@ section{position:relative;padding:clamp(3rem,5.5vw,5rem) 0;z-index:2}
 .hero{min-height:100vh;display:flex;align-items:center;padding-top:7rem;padding-bottom:4rem}
 .hero-inner{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(2rem,5vw,4.5rem);align-items:center;width:100%;position:relative;z-index:2}
 /* kinetic marquee that scrolls behind the hero photo */
-.hero-ticker{position:absolute;top:58%;left:50%;transform:translate(-50%,-50%);width:100vw;z-index:1;overflow:hidden;pointer-events:none;
+.hero-ticker{position:absolute;top:68%;left:50%;transform:translateX(-50%);width:100vw;z-index:1;overflow:hidden;pointer-events:none;
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
 .ticker-track{display:flex;align-items:center;width:max-content;white-space:nowrap;will-change:transform;animation:heroTicker 38s linear infinite}
 .ticker-track span{font-family:var(--M);font-size:clamp(1rem,1.9vw,1.5rem);letter-spacing:.16em;text-transform:uppercase;color:var(--gold);opacity:.68;padding:0 .15em}
@@ -219,7 +219,7 @@ section{position:relative;padding:clamp(3rem,5.5vw,5rem) 0;z-index:2}
   background:var(--glass);border:1px solid var(--glass-brd);color:var(--muted);
   backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:.3s}
 .htag:hover{color:var(--ink);border-color:var(--gold);transform:translateY(-2px)}
-.hero-ctas{display:flex;flex-wrap:wrap;gap:.8rem}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:3rem}
 /* hero photo */
 .hphoto{position:relative;display:flex;justify-content:center;perspective:1200px}
 .hphoto-card{position:relative;border-radius:var(--r);padding:10px;background:var(--glass-2);border:1px solid var(--glass-brd);
@@ -840,6 +840,22 @@ burger.addEventListener('click', function(){ navLinks.classList.contains('open')
 navScrim.addEventListener('click', closeMenu);
 navLinks.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeMenu); });
 document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeMenu(); });
+
+/* HERO MARQUEE: pin it just above the CTA buttons on any viewport height */
+(function(){
+  var hero = document.getElementById('hero');
+  if(!hero) return;
+  var ticker = hero.querySelector('.hero-ticker'), ctas = hero.querySelector('.hero-ctas');
+  if(!ticker || !ctas) return;
+  function posTicker(){
+    var hr = hero.getBoundingClientRect(), cr = ctas.getBoundingClientRect();
+    ticker.style.top = Math.round(cr.top - hr.top - 18 - ticker.offsetHeight) + 'px';
+  }
+  posTicker(); setTimeout(posTicker, 250);
+  window.addEventListener('resize', posTicker, {passive:true});
+  window.addEventListener('load', posTicker);
+  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(posTicker); }
+})();
 
 /* CURSOR GLOW + GLASS SPOTLIGHT */
 var glow = document.getElementById('cursorGlow');
