@@ -283,7 +283,7 @@ section{position:relative;padding:clamp(3rem,5.5vw,5rem) 0;z-index:2}
 
 /* carousel */
 .carousel{position:relative;border-radius:var(--r);overflow:hidden;touch-action:pan-y}
-.ctrack{display:flex;align-items:flex-start;cursor:grab;overflow:hidden;
+.ctrack{display:flex;align-items:flex-start;cursor:grab;
   transition:transform .55s cubic-bezier(.22,1,.36,1),height .45s cubic-bezier(.22,1,.36,1);will-change:transform}
 .ctrack.dragging{transition:none;cursor:grabbing}
 .cslide{flex:0 0 100%;padding:.2rem;user-select:none}
@@ -525,7 +525,7 @@ footer a{color:var(--gold)}
         <div class="stat-c glass spot"><span class="snum">3</span><span class="slbl">Active Agencies as OBM</span></div>
         <div class="stat-c glass spot"><span class="snum">15K+</span><span class="slbl">Calls Tracked &amp; Analysed</span></div>
         <div class="stat-c glass spot"><span class="snum">101%</span><span class="slbl">Task Completion Rate</span></div>
-        <div class="stat-c glass spot"><span class="snum">9+</span><span class="slbl">Recruitment Forms Automated</span></div>
+        <div class="stat-c glass spot"><span class="snum">18+</span><span class="slbl">Recruitment Forms Automated</span></div>
       </div>
       <div class="reveal d3">
         <div class="exp-row"><span class="exp-lbl">Systems Design &amp; Automation</span><span class="exp-txt">End-to-end automation pipelines using n8n, GHL, Airtable, and AI. Built from scratch, not stitched together.</span></div>
@@ -552,7 +552,7 @@ footer a{color:var(--gold)}
     <div class="mcell"><span class="mv mv-ma">101%</span><span class="mk">Completion Rate</span></div>
     <div class="mcell"><span class="mv mv-ma">1,209h</span><span class="mk">Hours Logged</span></div>
     <div class="mcell"><span class="mv mv-ma">9.47</span><span class="mk">Avg Client Score</span></div>
-    <div class="mcell"><span class="mv mv-ma">9+</span><span class="mk">Recruitment Forms</span></div>
+    <div class="mcell"><span class="mv mv-ma">18+</span><span class="mk">Recruitment Forms</span></div>
   </div>
 
   <div class="subsec reveal">
@@ -849,7 +849,7 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeMenu
   if(!ticker || !ctas) return;
   function posTicker(){
     var hr = hero.getBoundingClientRect(), cr = ctas.getBoundingClientRect();
-    ticker.style.top = Math.round(cr.top - hr.top - 18 - ticker.offsetHeight) + 'px';
+    ticker.style.top = Math.round(cr.top - hr.top - 10 - ticker.offsetHeight) + 'px';
   }
   posTicker(); setTimeout(posTicker, 250);
   window.addEventListener('resize', posTicker, {passive:true});
