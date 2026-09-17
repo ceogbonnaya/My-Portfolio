@@ -97,9 +97,6 @@ img{display:block;max-width:100%}
   transform:translate(-50%,-50%);pointer-events:none;z-index:1;transition:opacity .4s;opacity:0}
 [data-theme="dark"] .cursor-glow{background:radial-gradient(circle,rgba(167,139,250,.14),transparent 62%)}
 
-/* scroll progress */
-.scroll-prog{position:fixed;top:0;left:0;height:3px;width:0;z-index:1000;
-  background:linear-gradient(90deg,var(--gold),var(--ma),var(--gtc));box-shadow:0 0 12px rgba(167,139,250,.6)}
 
 /* ══════════════════════════════════════════════
    GLASS PRIMITIVE
@@ -331,6 +328,7 @@ section{position:relative;padding:clamp(3rem,5.5vw,5rem) 0;z-index:2}
   background:linear-gradient(135deg,var(--bg3),var(--bg4));border:1px solid var(--glass-brd);box-shadow:var(--shadow)}
 .proj-media::after{content:"";position:absolute;inset:0;
   background:radial-gradient(120% 120% at 50% 0%,rgba(124,58,237,.18),transparent 60%)}
+.proj-video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000;z-index:2;display:block}
 .proj-soon{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.9rem}
 .proj-play{width:60px;height:60px;border-radius:50%;background:var(--glass-2);border:1px solid var(--glass-brd);
   backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;
@@ -453,7 +451,6 @@ footer a{color:var(--gold)}
 </head>
 <body>
 
-<div class="scroll-prog" id="scrollProg"></div>
 <div class="cursor-glow" id="cursorGlow"></div>
 <div class="bgfx">
   <div class="grid"></div>
@@ -636,7 +633,7 @@ footer a{color:var(--gold)}
       <div class="ctrack">
         <div class="cslide">
           <div class="proj-card">
-            <div class="proj-media"><div class="proj-soon"><span class="proj-play">▶</span><span class="lbl">Demo coming soon</span></div></div>
+            <div class="proj-media"><video class="proj-video" controls preload="metadata" playsinline><source src="kajabi-setup.mp4" type="video/mp4"></video></div>
             <div>
               <span class="proj-ctx">Kajabi · Course Launch</span>
               <h3 class="proj-title">Full Course Build on Kajabi</h3>
@@ -826,12 +823,6 @@ var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:red
 var nav = document.getElementById('nav');
 window.addEventListener('scroll', function(){ nav.classList.toggle('scrolled', scrollY > 40); }, {passive:true});
 
-/* SCROLL PROGRESS */
-var prog = document.getElementById('scrollProg');
-window.addEventListener('scroll', function(){
-  var h = document.documentElement.scrollHeight - innerHeight;
-  prog.style.width = (h > 0 ? (scrollY / h) * 100 : 0) + '%';
-}, {passive:true});
 
 /* MOBILE MENU */
 var burger = document.getElementById('burger'), navLinks = document.getElementById('navLinks'), navScrim = document.getElementById('navScrim');
